@@ -8,6 +8,7 @@ Base = declarative_base()
 class Book(Base):
     #################
     # Modele a compléter
+    
 
     pass
 
