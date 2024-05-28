@@ -1,28 +1,6 @@
-from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from create_table import Base, Book, engine 
 import csv
-
-Base = declarative_base()
-
-class Book(Base):
-       
-    __tablename__ = "books"
-
-    ISBN = Column(String, primary_key=True)
-    Book_Title = Column(String, nullable=False)
-    Book_Author = Column(String, nullable=False)
-    Year_Of_Publication = Column(Integer, nullable=False)
-    Publisher = Column(String, nullable=False)
-    Image_URL_S = Column(String)
-    Image_URL_M = Column(String)
-    Image_URL_L = Column(String)
-
-    
-
-# Configuration de la base de données
-engine = create_engine('sqlite:///books.db')
-Base.metadata.create_all(engine)
 
 # import
 
@@ -45,6 +23,8 @@ def import_books_from_csv(csv_file_path):
                 )
             session.add(book)
         session.commit()
+        # a confirmer
+        session.close()
 
 # Chemin vers le fichier CSV
 csv_file_path = 'data/books.csv'
