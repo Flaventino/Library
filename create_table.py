@@ -18,6 +18,9 @@ class Book(Base):
     Image_URL_M = Column(String)
     Image_URL_L = Column(String)
 
+    def __repr__(self):
+        return(f"{self.Book_Title}[{self.Book_Author}]({self.Year_Of_Publication})")
+
 engine = create_engine('sqlite:///books.db')
 
 
