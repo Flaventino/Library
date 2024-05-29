@@ -26,8 +26,8 @@ class Rating(Base):
        
     __tablename__ = "ratings"
 
-    User_id = Column(String, nullable=False,primary_key=True, ForeignKey=True)
-    ISBN = Column(String,primary_key=True, ForeignKey=True)
+    User_id = Column(String, ForeignKey('users.User_id'), nullable=False, primary_key=True)
+    ISBN = Column(String, ForeignKey('books.ISBN'), primary_key=True)
     Book_Rating = Column(Integer, nullable=False)
     
 
