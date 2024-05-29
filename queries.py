@@ -16,7 +16,6 @@ session_queries = Session()
 #print(type(query2))
 """ for x in query2:
    print(x) """
-#print(f"affichage initial des 5 premiers livres : {query2}")
 
 # affichage des livres dont le titre comporte "The hobbit"
 #query3 = session_queries.query(Book).where(Book.Book_Title.like("%the Hobbit%"))

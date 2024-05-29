@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer, String, create_engine, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import csv
@@ -19,7 +19,30 @@ class Book(Base):
     Image_URL_L = Column(String)
 
     def __repr__(self):
-        return(f"{self.Book_Title}[{self.Book_Author}]({self.Year_Of_Publication})")
+        return(f"{self.Book_Title}[{self.Book_Author}]({self.Year_Of_Publication})")    
+
+
+class Rating(Base):
+       
+    __tablename__ = "ratings"
+
+    id = Column(Integer, primary_key=True)
+    User_id = Column(String, nullable=False, ForeignKey=True)
+    ISBN = Column(String, ForeignKey=True)
+    Book_Rating = Column(Integer, nullable=False)
+    
+
+"""   def __repr__(self):return(f"{self.Book_Title}[{self.Book_Author}]({self.Year_Of_Publication})") """
+
+class User(Base):
+
+    __tablename__ = "users"
+
+    User_id = Column(String, primary_key=True)
+    Location = Column(String, nullable=True)
+    Age = Column(Integer, nullable=True)
+
+
 
 engine = create_engine('sqlite:///books.db')
 
