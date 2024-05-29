@@ -1,6 +1,8 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from create_table import Base, Book, engine
+from create_table import Base, Book, Rating, engine
+from sqlalchemy import func
+import numpy as np
 
 
 Session = sessionmaker(bind=engine)
@@ -19,7 +21,13 @@ session_queries = Session()
 
 # affichage des livres dont le titre comporte "The hobbit"
 #query3 = session_queries.query(Book).where(Book.Book_Title.like("%the Hobbit%"))
-query3 = session_queries.query(Book).filter(Book.Book_Title.like("%the Hobbit%"))
+""" query3 = session_queries.query(Book).filter(Book.Book_Title.like("%the Hobbit%"))
 for x in query3:
+   print(x) """
+
+# moyenne des notes danns ratings$
+query4 = session_queries.query(func.avg(Rating.Book_Rating.label('average')))
+for x in query4:
    print(x)
 
+# ecart type des notes dans ratings
